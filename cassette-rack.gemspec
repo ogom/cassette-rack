@@ -5,7 +5,7 @@ require 'cassette-rack/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "cassette-rack"
-  spec.version       = Cassette::Rack::VERSION
+  spec.version       = CassetteRack::VERSION
   spec.authors       = ["ogom"]
   spec.email         = ["ogom@hotmail.co.jp"]
   spec.summary       = %q{VCR operation front}
