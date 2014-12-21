@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = CassetteRack::VERSION
   spec.authors       = ["ogom"]
   spec.email         = ["ogom@hotmail.co.jp"]
-  spec.summary       = %q{VCR operation front}
-  spec.description   = %q{VCR operation front of Rack}
+  spec.summary       = %q{VCR front operation}
+  spec.description   = %q{VCR front operation of Rack}
   spec.homepage      = "http://ogom.github.io/cassette-rack"
   spec.license       = "MIT"
 

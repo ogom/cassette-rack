@@ -1,6 +1,6 @@
 # Cassette::Rack
 
-VCR operation front
+VCR front operation
 
 ## Installation
 
@@ -24,7 +24,11 @@ $ gem install cassette-rack
 
 ## Usage
 
-TODO: Write usage instructions here
+Add this line to your `config.ru`:
+
+```
+run CassetteRack::Engine
+```
 
 ## License
 

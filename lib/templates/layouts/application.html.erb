@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head><title>Cassette Rack</title>
+<style type="text/css">
+
+  body { background-color: #fff; color: #333; }
+
+  body, p, ol, ul, td {
+    font-family: helvetica, verdana, arial, sans-serif;
+    font-size:   13px;
+    line-height: 18px;
+  }
+
+  pre {
+    background-color: #eee;
+    padding-left: 10px;
+  }
+
+  a {
+    color: #000;
+    text-decoration: none;
+    padding-left: 4px;
+    padding-right: 10px;
+  }
+  a:visited { color: #000; }
+  a:hover { color: #000; background-color:#fff; }
+
+  h2 { padding-left: 10px; }
+  h3 { padding-left: 10px; }
+
+  li.active { background-color: #666; }
+  li.active > a { color: #fff; }
+  li.active > a:hover { color: #fff; background-color:#666; }
+
+  div.index {
+    float:left;
+    padding-right: 10px;
+    padding-bottom: 1000px;
+    border-right: solid #eee;
+  }
+
+  div.show {
+    padding-top: 40px;
+    padding-left: 160px;
+  }
+</style>
+
+<script type="text/ecmascript">
+  function check_branch(id) {
+    var element = document.getElementById(id);
+    if (element.style.display == 'none') {
+      element.style.display = 'block';
+    } else {
+      element.style.display = 'none';
+    }
+  }
+</script>
+</head>
+<body>
+  <h2>Cassette Rack</h2>
+  <p>Operation of the Video Cassette Recorder</p>
+
+  <div class='index'>
+    <%= index_tag %>
+  </div>
+
+  <div class='show'>
+    <pre>
+      <%= show_tag %>
+    </pre>
+  </div>
+</body>
+</html>
