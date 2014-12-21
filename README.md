@@ -1,6 +1,6 @@
-# Cassette::Rack
+# CassetteRack
 
-VCR front operation
+Operate of the VCR cassette on Rack.
 
 ## Installation
 
