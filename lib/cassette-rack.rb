@@ -6,6 +6,7 @@ require_relative 'cassette-rack/default'
 require_relative 'cassette-rack/engine'
 require_relative 'cassette-rack/tree'
 require_relative 'cassette-rack/drawer'
+require_relative 'cassette-rack/test_request'
 
 module CassetteRack
   class << self
