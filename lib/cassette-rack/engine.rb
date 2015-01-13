@@ -17,33 +17,38 @@ module CassetteRack
     end
 
     private
-      def index_tag
+      def cassettes_tag
         render_branch(tree)
       end
 
       def render_branch(node)
-        raw = ''
-        raw += "<div style=\"padding-left: #{node.level}0px;\">\n"
-        raw += "<h3 onclick=\"check_branch('#{node.id}')\" >#{node.name}</h3>\n"
-        raw += "<div id=#{node.id}>\n"
-        arr = []
+        raw = "<ol #{node.level == 0 ? "id='tree'" : nil}><li>"
+        raw += "<label class='branch' for='#{node.id}'>#{node.name}</label>"
+        raw += "<input type='checkbox' id='#{node.id}' checked />\n"
+
+        entries = []
         node.entries.each do |entry|
           if entry.leaf?
-            arr << entry
+            entries << entry
           else
             raw += render_branch(entry)
           end
         end
-        raw += "<ul>" + arr.map do |entry|
-          raw = "<li"
-          raw += " class='active'"if entry.id == request.path_info
-          raw += "><a href=#{request.script_name}#{entry.id}>#{entry.name}</a></li>"
-        end.join("\n")
-        raw += "</ul></div></div>\n"
+
+        if entries.count > 0
+          raw += "<ol>"
+          raw += entries.map do |entry|
+            raw = "<li class='leaf #{entry.id == request.path_info ? "active" : nil}'>"
+            raw += "<a href=#{request.script_name}#{entry.id}>#{entry.name}</a></li>"
+          end.join("\n")
+          raw += "</ol>\n"
+        end
+
+        raw += "</li></ol>\n"
         raw
       end
 
-      def show_tag
+      def cassette_tag
         raw = nil
         entry = find_entry(request.path_info)
         unless entry.nil?
