@@ -2,7 +2,7 @@ require 'faraday'
 require 'cassette-rack/response'
 
 module CassetteRack
-  module TestRequest
+  module Request
     def get(path, params=nil, headers=nil)
       request(:get, path, params, headers)
     end

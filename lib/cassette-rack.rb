@@ -1,3 +1,4 @@
+require 'liquid'
 require 'pathname'
 
 require_relative 'cassette-rack/version'
@@ -6,7 +7,7 @@ require_relative 'cassette-rack/default'
 require_relative 'cassette-rack/engine'
 require_relative 'cassette-rack/tree'
 require_relative 'cassette-rack/drawer'
-require_relative 'cassette-rack/test_request'
+require_relative 'cassette-rack/request'
 
 module CassetteRack
   class << self

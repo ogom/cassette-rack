@@ -1,24 +1,24 @@
 require 'rack'
-require 'erb'
 
 module CassetteRack
   class Engine
-    attr_accessor :request, :tree
+    attr_accessor :request
 
     def call(env)
       @request = Rack::Request.new(env)
-      @tree = CassetteRack::Tree.create(CassetteRack::Configure.source_path)
+      tree = CassetteRack::Tree.create(CassetteRack::Configure.source_path)
 
       status = 200
       headers = {'Content-Type' => 'text/html'}
-      body = ERB.new(CassetteRack::Configure.application_template).result(binding)
+      body = render_application(render_branch(tree), render_leaf(request.path_info))
 
       [status, headers, [body]]
     end
 
     private
-      def cassettes_tag
-        render_branch(tree)
+      def render_application(cassettes_tag, cassette_tag)
+        template = Liquid::Template.parse(CassetteRack::Configure.application_template)
+        template.render('cassettes_tag' => cassettes_tag, 'cassette_tag' => cassette_tag)
       end
 
       def render_branch(node)
@@ -48,25 +48,9 @@ module CassetteRack
         raw
       end
 
-      def cassette_tag
-        raw = nil
-        entry = find_entry(request.path_info)
-        unless entry.nil?
-          drawer = CassetteRack::Drawer.new
-          raw = drawer.create(entry.path)
-        end
-        raw
-      end
-
-      def find_entry(id)
-        raw = nil
-        tree.each do |entry|
-          if entry.id == id
-            raw = entry
-            break
-          end
-        end
-        raw
+      def render_leaf(path)
+        drawer = CassetteRack::Drawer.new(path)
+        Kramdown::Document.new(drawer.pull).to_html
       end
     # end private
 
