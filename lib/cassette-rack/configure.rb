@@ -1,3 +1,5 @@
+require 'vcr'
+
 module CassetteRack
   module Configure
     class << self

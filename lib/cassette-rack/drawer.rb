@@ -9,16 +9,32 @@ module CassetteRack
       @name = name
     end
 
+    def cassette
+      @cassette ||= VCR::Cassette.new(name)
+    end
+
+    def render
+      Kramdown::Document.new(self.pull).to_html
+    end
+
+    def delete
+      File.delete cassette.file if self.exist?
+    end
+
+    def exist?
+      File.exist?(cassette.file)
+    end
+
     def pull
-      request = CassetteRack::Decorator::Request.new(cassette.request)
-      response = CassetteRack::Decorator::Response.new(cassette.response)
+      request = CassetteRack::Decorator::Request.new(http.request)
+      response = CassetteRack::Decorator::Response.new(http.response)
 
       template = Liquid::Template.parse(CassetteRack::Configure.content_template)
       template.render('title' => name, 'request' => request, 'response' => response)
     end
 
-    def cassette
-      @cassette ||= VCR::Cassette.new(name).http_interactions.interactions.first
+    def http
+      cassette.http_interactions.interactions.first
     end
   end
 end
