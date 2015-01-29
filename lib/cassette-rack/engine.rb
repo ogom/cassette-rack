@@ -19,6 +19,7 @@ module CassetteRack
     private
       def controller(env)
         request = Rack::Request.new(env)
+        params = Hash[URI.decode_www_form(request.query_string)]
         drawer = CassetteRack::Drawer.new(request.path_info)
 
         case request.request_method
@@ -26,15 +27,21 @@ module CassetteRack
           drawer.delete
         end
 
-        tree = CassetteRack::Tree.create(CassetteRack::Configure.source_path)
-        cassettes_tag = render_branch(tree, request.script_name, request.path_info)
-        cassette_tag = render_leaf(drawer, request.script_name + request.path_info)
+        case params['response']
+        when 'preview'
+          template = Liquid::Template.parse(CassetteRack::Configure.preview_template)
+          body = template.render('body' => drawer.http.response.body)
+        else
+          tree = CassetteRack::Tree.create(CassetteRack::Configure.source_path)
+          cassettes_tag = render_branch(tree, request.script_name, request.path_info)
+          cassette_tag = render_leaf(drawer, request.script_name + request.path_info)
+
+          template = Liquid::Template.parse(CassetteRack::Configure.application_template)
+          body = template.render('cassettes_tag' => cassettes_tag, 'cassette_tag' => cassette_tag)
+        end
 
         status = 200
         headers = {'Content-Type' => 'text/html'}
-        template = Liquid::Template.parse(CassetteRack::Configure.application_template)
-        body = template.render('cassettes_tag' => cassettes_tag, 'cassette_tag' => cassette_tag)
-
         [status, headers, [body]]
       end
 
@@ -68,10 +75,14 @@ module CassetteRack
       def render_leaf(drawer, action)
         if drawer.exist?
           raw = drawer.render
+          raw += "<div class='btn-group'>\n"
+          raw += "<a class='btn btn-primary' href='#{action}?response=preview'>\n"
+          raw += "<span>Preview</span></a>\n"
           raw += "<form method='post' action='#{action}'>\n"
           raw += "<input name='_method' value='delete' type='hidden' />\n"
           raw += "<input class='btn btn-danger' type='submit' value='Destroy'>\n"
           raw += "</form>\n"
+          raw += "</div>\n"
         else
           raw = "<h3>Please select cassette</h3>"
         end

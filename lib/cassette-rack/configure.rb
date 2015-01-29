@@ -37,12 +37,20 @@ module CassetteRack
         @content_layout ||= File.expand_path('content.md.liquid', File.join(self.templates_path, 'layouts'))
       end
 
+      def preview_layout
+        @preview_layout ||= File.expand_path('preview.liquid', File.join(self.templates_path, 'layouts'))
+      end
+
       def application_template
         File.read(self.application_layout)
       end
 
       def content_template
         File.read(self.content_layout)
+      end
+
+      def preview_template
+        File.read(self.preview_layout)
       end
     end
   end
