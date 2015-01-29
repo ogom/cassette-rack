@@ -3,7 +3,7 @@ require 'vcr'
 module CassetteRack
   module Configure
     class << self
-      attr_accessor :cassette_extension, :cassette_path, :url
+      attr_accessor :cassette_path, :url
 
       def setup
         keys.each do |key|
@@ -18,7 +18,7 @@ module CassetteRack
       end
 
       def keys
-        @keys ||= %i[cassette_extension cassette_path url]
+        @keys ||= %i[cassette_path url]
       end
 
       def source_path

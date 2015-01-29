@@ -20,9 +20,17 @@ module CassetteRack
       def controller(env)
         request = Rack::Request.new(env)
         params = Hash[URI.decode_www_form(request.query_string)]
+        body = Hash[URI.decode_www_form(request.body.read)]
         drawer = CassetteRack::Drawer.new(request.path_info)
 
-        case request.request_method
+        case body['_method']
+        when 'delete'
+          request_method = body['_method'].upcase
+        else
+          request_method = request.request_method
+        end
+
+        case request_method
         when 'DELETE'
           drawer.delete
         end

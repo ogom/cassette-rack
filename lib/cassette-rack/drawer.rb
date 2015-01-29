@@ -1,3 +1,5 @@
+require 'kramdown'
+
 require_relative 'decorator/request'
 require_relative 'decorator/response'
 

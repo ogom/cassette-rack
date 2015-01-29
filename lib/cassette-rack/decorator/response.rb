@@ -1,3 +1,5 @@
+require 'json'
+
 module CassetteRack
   module Decorator
     class Response
