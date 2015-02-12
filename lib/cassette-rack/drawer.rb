@@ -36,7 +36,7 @@ module CassetteRack
     end
 
     def http
-      cassette.http_interactions.interactions.first
+      cassette.http_interactions.interactions.last
     end
   end
 end
