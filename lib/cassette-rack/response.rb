@@ -50,6 +50,8 @@ module CassetteRack
             @content = body
           end
         end
+      rescue
+        @content = body
       end
     # end private
   end

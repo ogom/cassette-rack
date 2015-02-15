@@ -5,27 +5,27 @@ module CassetteRack
   module Request
     attr_reader :request_options
 
-    def get(path, params=nil, headers=nil)
+    def get(path, params={}, headers={})
       request(:get, path, params, headers)
     end
 
-    def post(path, body, headers=nil)
-      request(:post, path, nil, headers, body)
+    def post(path, body, headers={})
+      request(:post, path, {}, headers, body)
     end
 
-    def patch(path, body, headers=nil)
-      request(:patch, path, nil, headers, body)
+    def patch(path, body, headers={})
+      request(:patch, path, {}, headers, body)
     end
 
-    def put(path, body=nil, headers=nil)
-      request(:put, path, nil, headers, body)
+    def put(path, body={}, headers={})
+      request(:put, path, {}, headers, body)
     end
 
-    def delete(path, headers=nil)
-      request(:delete, path, nil, headers)
+    def delete(path, headers={})
+      request(:delete, path, {}, headers)
     end
 
-    def request(method, path, params=nil, headers=nil, body=nil, options=nil)
+    def request(method, path, params={}, headers={}, body={}, options={})
       if request_options
         options = request_options
       else
@@ -36,7 +36,7 @@ module CassetteRack
       res = conn.send(method) do |req|
         case method
         when :get, :delete
-          req.url path
+          req.url path, params
         when :post, :patch, :put
           req.path = path
           req.body = parse_content(body, req)

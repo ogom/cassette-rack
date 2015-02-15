@@ -27,7 +27,14 @@ $ gem install cassette-rack
 Add this line to your `config.ru`:
 
 ```
+require 'cassette-rack'
 run CassetteRack::Engine
+```
+
+And then execute:
+
+```
+$ rackup
 ```
 
 ## License
