@@ -4,6 +4,7 @@ module CassetteRack
   module Configure
     class << self
       attr_accessor :cassette_path, :url
+      attr_writer :content_layout
 
       def setup
         keys.each do |key|
