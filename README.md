@@ -4,6 +4,8 @@ Operate of the VCR cassette on Rack.
 
 ![caracal](https://dl.dropboxusercontent.com/u/14690051/images/logo/caracal.png)
 
+Caracal is cassette rack alchemist.
+
 ## Installation
 
 Add this line to your application's Gemfile:

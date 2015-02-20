@@ -9,11 +9,11 @@ module CassetteRack
       request(:get, path, params, headers)
     end
 
-    def post(path, body, headers={})
+    def post(path, body={}, headers={})
       request(:post, path, {}, headers, body)
     end
 
-    def patch(path, body, headers={})
+    def patch(path, body={}, headers={})
       request(:patch, path, {}, headers, body)
     end
 
@@ -51,7 +51,7 @@ module CassetteRack
     end
 
     def parse_content(body, req)
-      if req.headers['content-type'] == 'application/json' and body.class == Hash
+      if req.headers['content-type'] == 'application/json' and body.is_a?(Hash)
         body.to_json
       else
         body

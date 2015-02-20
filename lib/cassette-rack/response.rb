@@ -1,9 +1,6 @@
-#require 'json'
-
 module CassetteRack
   class Response
     attr_reader :status, :headers, :body, :content
-    #, :method
 
     def initialize(res)
       @response = res
