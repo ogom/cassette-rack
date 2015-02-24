@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'faraday', '~> 0.9'
   spec.add_dependency 'kramdown', '~> 1.5'
   spec.add_dependency 'liquid', '~> 3.0'
-  spec.add_dependency 'rack', '~> 1.6'
+  spec.add_dependency 'rack', '~> 1.5'
   spec.add_dependency 'vcr', '~> 2.9'
 
   spec.add_development_dependency 'bundler'
