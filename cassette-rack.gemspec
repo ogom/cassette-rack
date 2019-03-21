@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "cassette-rack"
   spec.version       = CassetteRack::VERSION
   spec.authors       = ["ogom"]
-  spec.email         = ["ogom@hotmail.co.jp"]
+  spec.email         = ["takashi@bouquetec.com"]
   spec.summary       = %q{Operate of the VCR cassette}
   spec.description   = %q{Operate of the VCR cassette on Rack}
   spec.homepage      = "http://ogom.github.io/cassette-rack"
@@ -18,11 +18,11 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency 'faraday', '~> 0.9'
-  spec.add_dependency 'kramdown', '~> 1.5'
-  spec.add_dependency 'liquid', '~> 3.0'
-  spec.add_dependency 'rack', '~> 1.5'
-  spec.add_dependency 'vcr', '~> 2.9'
+  spec.add_dependency 'faraday', '~> 0.15'
+  spec.add_dependency 'kramdown', '~> 2.1'
+  spec.add_dependency 'liquid', '~> 4.0'
+  spec.add_dependency 'rack', '~> 2.0'
+  spec.add_dependency 'vcr', '~> 4.0'
 
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
