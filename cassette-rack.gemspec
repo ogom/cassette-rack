@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'kramdown', '~> 2.1'
   spec.add_dependency 'liquid', '~> 4.0'
   spec.add_dependency 'rack', '~> 2.0'
-  spec.add_dependency 'vcr', '~> 4.0'
+  spec.add_dependency 'vcr', '~> 5.0'
 
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
